@@ -33,7 +33,7 @@ public class SearchProductTest extends TestBase {
 	
 	@Test(priority=1)
 	public void searchWithValidProductName() {
-		search.sendKeys("HP");
+		search.sendKeys(dataProp.getProperty("validProduct"));
 		search.sendKeys(Keys.ENTER);
 softAssert.assertTrue(driver.findElement(By.linkText("HP LP3065")).isDisplayed());
         softAssert.assertAll();
@@ -42,7 +42,7 @@ softAssert.assertTrue(driver.findElement(By.linkText("HP LP3065")).isDisplayed()
 	
 	@Test(priority=2)
 	public void searchWithInvalidProductName() {
-		search.sendKeys("DELL");
+		search.sendKeys(dataProp.getProperty("InvalidProduct"));
 		driver.findElement(By.xpath("//button[contains(@class,'btn-default')]")).click();
 		softAssert.assertTrue(driver.findElement(By.xpath("//p[text()='There is no product that matches the search criteria.']")).isDisplayed());
 		softAssert.assertAll();

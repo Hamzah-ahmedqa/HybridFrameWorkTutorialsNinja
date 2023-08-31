@@ -28,7 +28,7 @@ public SoftAssert softAssert = new SoftAssert();
 
 @BeforeMethod
 public void setUp() {
- driver = new ChromeDriver();
+
  
       driver = openApplication("Chrome");
 	driver.findElement(By.linkText("My Account")).click();
@@ -37,11 +37,11 @@ public void setUp() {
 @Test(priority=1)
 public void registerAccountWithMandatoryFields() {
 	
-	driver.findElement(By.cssSelector("input#input-firstname")).sendKeys("Humza");
-	driver.findElement(By.cssSelector("input#input-lastname")).sendKeys("Automation");
+	driver.findElement(By.cssSelector("input#input-firstname")).sendKeys(dataProp.getProperty("firstName"));
+	driver.findElement(By.cssSelector("input#input-lastname")).sendKeys(dataProp.getProperty("lastName"));
 	                                                                   //call this method for constant changing, dynamic should be added at all of them
 	driver.findElement(By.cssSelector("input#input-email")).sendKeys(Utils.emailWithDateTimeStamp());
-	driver.findElement(By.cssSelector("input#input-telephone")).sendKeys("4436672289");
+	driver.findElement(By.cssSelector("input#input-telephone")).sendKeys(dataProp.getProperty("telephone"));
 	driver.findElement(By.cssSelector("input#input-password")).sendKeys(prop.getProperty("ValidPassword"));
 	driver.findElement(By.cssSelector("input#input-confirm")).sendKeys(prop.getProperty("ValidPassword"));
 	driver.findElement(By.xpath("//input[@name='agree']")).click();
@@ -55,16 +55,16 @@ public void registerAccountWithMandatoryFields() {
 @Test(priority=2)
 public void registerAccountWithExistingEmailID() {
 	
-	driver.findElement(By.cssSelector("input#input-firstname")).sendKeys("Humza");
-	driver.findElement(By.cssSelector("input#input-lastname")).sendKeys("Automation");
+	driver.findElement(By.cssSelector("input#input-firstname")).sendKeys(dataProp.getProperty("firstName"));
+	driver.findElement(By.cssSelector("input#input-lastname")).sendKeys(dataProp.getProperty("lastName"));
 	driver.findElement(By.cssSelector("input#input-email")).sendKeys(prop.getProperty("ValidEmail"));
-	driver.findElement(By.cssSelector("input#input-telephone")).sendKeys("4436672289");
+	driver.findElement(By.cssSelector("input#input-telephone")).sendKeys(dataProp.getProperty("telephone"));
 	driver.findElement(By.cssSelector("input#input-password")).sendKeys(prop.getProperty("ValidPassword"));
 	driver.findElement(By.cssSelector("input#input-confirm")).sendKeys(prop.getProperty("ValidPassword"));
 	driver.findElement(By.xpath("//input[@name='agree']")).click();
 	driver.findElement(By.cssSelector("input.btn.btn-primary")).click();
 	String actualWarningMessage = driver.findElement(By.xpath("//div[contains(@class,'alert-dismissible')]")).getText();
-	String expectedWarningMEssage = "Warning: E-Mail Address is already registered!";
+	String expectedWarningMEssage = dataProp.getProperty("expectedWarningMessageForDuplicateEmail");
 	softAssert.assertTrue(actualWarningMessage.contains(expectedWarningMEssage));
 	softAssert.assertAll();
 	
@@ -77,7 +77,7 @@ public void registerAccountWithAllFields() {
 	driver.findElement(By.cssSelector("input#input-firstname")).sendKeys("Humza");
 	driver.findElement(By.cssSelector("input#input-lastname")).sendKeys("Automation");
 	driver.findElement(By.cssSelector("input#input-email")).sendKeys(Utils.emailWithDateTimeStamp());
-	driver.findElement(By.cssSelector("input#input-telephone")).sendKeys("4436672289");
+	driver.findElement(By.cssSelector("input#input-telephone")).sendKeys(dataProp.getProperty("telephone"));
 	driver.findElement(By.cssSelector("input#input-password")).sendKeys(prop.getProperty("ValidPassword"));
 	driver.findElement(By.cssSelector("input#input-confirm")).sendKeys(prop.getProperty("ValidPassword"));
 	driver.findElement(By.xpath("//input[@name='newsletter' and @value='0']")).click();
@@ -97,7 +97,7 @@ public void registerWithoutFillingAnyFields() throws Exception {
 	System.out.println("The number of warning messages are :"+warningMessages.size());
 	
 	String actualPrivacyWarningMessage = driver.findElement(By.xpath("//div[contains(@class,'alert-dismissible')]")).getText();
-	String expectedPrivacyWarningMessage = "Warning: You must agree to the Privacy Policy!";
+	String expectedPrivacyWarningMessage = dataProp.getProperty("ExpectedPrivacyWarningMessage");
 	
 	softAssert.assertTrue(actualPrivacyWarningMessage.contains(expectedPrivacyWarningMessage));
 	
@@ -107,19 +107,19 @@ public void registerWithoutFillingAnyFields() throws Exception {
 	    // Determine the expected warning message based on the index
 	    switch (i) {
 	        case 0://start from 0 because the index starts from 0
-	            expectedWarningMessage = "First Name must be between 1 and 32 characters!";
+	            expectedWarningMessage = dataProp.getProperty("firstNameWarningMessage");
 	            break;
 	        case 1:
-	            expectedWarningMessage = "Last Name must be between 1 and 32 characters!";
-	            break;
+	            expectedWarningMessage = dataProp.getProperty("lastNameWarningMessage");
+	            break; 
 	        case 2:
-	            expectedWarningMessage = "E-Mail Address does not appear to be valid!";
+	            expectedWarningMessage = dataProp.getProperty("emailWarningMessage");
 	            break;
 	        case 3:
-	            expectedWarningMessage = "Telephone must be between 3 and 32 characters!";
+	            expectedWarningMessage = dataProp.getProperty("telePhoneWarningMessage");
 	            break;
 	        case 4:
-	            expectedWarningMessage = "Password must be between 4 and 20 characters!";
+	            expectedWarningMessage = dataProp.getProperty("passwordWarningMessage");
 	            break;
 	    }
 

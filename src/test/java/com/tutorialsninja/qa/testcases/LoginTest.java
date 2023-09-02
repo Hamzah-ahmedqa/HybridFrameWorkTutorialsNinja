@@ -26,6 +26,7 @@ public class LoginTest extends TestBase{
 
 	WebDriver driver;
 	SoftAssert softAssert = new SoftAssert();
+	public LoginPage loginPage; //now since we added this we can remove this in each test
 	@BeforeMethod
 	public void setUp() {
 
@@ -36,14 +37,14 @@ public class LoginTest extends TestBase{
 	HomePage homePage = new HomePage(driver); //have to pass the driver
 	homePage.clickOnMyAccountLink();
 	//	driver.findElement(By.linkText("Login")).click(); // this is also in homepage
-		homePage.clickOnLoginLink();
-		
+	//	homePage.clickOnLoginLink(); //this returns a newLoginPage
+	 loginPage = homePage.clickOnLoginLink();
 		
 	}
 	
 	@Test(priority=1)
 	public void verifyLoginWithValidCredentials() {
-          LoginPage loginPage = new LoginPage(driver);
+    //      LoginPage loginPage = new LoginPage(driver);
           loginPage.enterEmailInTextBoxField(prop.getProperty("ValidEmail"));
 	//	driver.findElement(By.id("input-email")).sendKeys(prop.getProperty("ValidEmail"));
 	//	driver.findElement(By.id("input-password")).sendKeys(prop.getProperty("ValidPassword"));
@@ -59,7 +60,7 @@ public class LoginTest extends TestBase{
 	
 	@Test(priority=2)
 	public void verifyLoginWithInvalidCredentials() {
-		LoginPage loginPage = new LoginPage(driver);
+	//	LoginPage loginPage = new LoginPage(driver);
 		loginPage.enterEmailInTextBoxField(Utils.emailWithDateTimeStamp());
 	//	driver.findElement(By.id("input-email")).sendKeys(Utils.emailWithDateTimeStamp());
 	//	driver.findElement(By.id("input-password")).sendKeys(dataProp.getProperty("invalidPassword"));
@@ -76,7 +77,7 @@ public class LoginTest extends TestBase{
 	
 	@Test(priority=3)
 	public void verifyLoginWithValidUserAndInValidPassword() {
-		LoginPage loginPage = new LoginPage(driver);
+	//	LoginPage loginPage = new LoginPage(driver);
 		loginPage.enterEmailInTextBoxField(prop.getProperty("ValidEmail"));
 	//	driver.findElement(By.id("input-email")).sendKeys(prop.getProperty("ValidEmail"));
 		loginPage.enterPasswordInTextBoxField(dataProp.getProperty("invalidPassword"));
@@ -93,7 +94,7 @@ public class LoginTest extends TestBase{
 	
 	@Test(priority=4)
 	public void verifyLoginWithValidPasswordAndInvalidUserName() {
-		LoginPage loginPage = new LoginPage(driver);
+	//	LoginPage loginPage = new LoginPage(driver);
 		loginPage.enterEmailInTextBoxField(dataProp.getProperty("invalidUserName"));
 		// driver.findElement(By.id("input-email")).sendKeys(dataProp.getProperty("invalidUserName"));
 	//	driver.findElement(By.id("input-password")).sendKeys(prop.getProperty("ValidPassword"));
@@ -109,7 +110,7 @@ public class LoginTest extends TestBase{
 	
 	@Test(priority=5)
 	public void verifyLoginWithNoCredentials() {
-		LoginPage loginPage = new LoginPage(driver);
+	//	LoginPage loginPage = new LoginPage(driver);
 		loginPage.clickOnLoginButton();
 	//	driver.findElement(By.cssSelector("input.btn.btn-primary")).click();
 	//	String actualWarningMessage = driver.findElement(By.xpath("//div[contains(text(),'Warning: No match for E-Mail Address and/or Password.')]")).getText();
@@ -121,7 +122,7 @@ public class LoginTest extends TestBase{
 	}
 	@Test(priority=6,dataProvider = "TutorialsNinjaLogin",dataProviderClass = DataprovidersForExcel.class)
 	public void loginWithValidCredentialsUsingExcel(String email, String password) {
-		 LoginPage loginPage = new LoginPage(driver);	
+	//	 LoginPage loginPage = new LoginPage(driver);	
 		 AccountPage accountPage = new AccountPage(driver);
 //		driver.findElement(By.id("input-email")).sendKeys(email);
 		 loginPage.enterEmailInTextBoxField(email);

@@ -44,9 +44,10 @@ public class HomePage {
 		
 	}
 	
-	public void clickOnLoginLink() {
-		
+	public LoginPage clickOnLoginLink() {
+		     //from void
 		LoginLink.click();
+		return new LoginPage(driver); // this is new
 	}
 	
 	public void clickOnRegisterLink() {

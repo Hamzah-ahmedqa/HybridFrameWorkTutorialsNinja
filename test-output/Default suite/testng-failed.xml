@@ -9,6 +9,7 @@
           <include name="setUp"/>
           <include name="tearDown"/>
           <include name="searchWithInvalidProductName"/>
+          <include name="searchWithValidProductName"/>
         </methods>
       </class> <!-- com.tutorialsninja.qa.testcases.SearchProductTest -->
     </classes>

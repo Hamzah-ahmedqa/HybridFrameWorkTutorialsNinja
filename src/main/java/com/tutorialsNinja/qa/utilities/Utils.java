@@ -17,5 +17,5 @@ public class Utils {
 	public final static int PAGELOAD_TIMEOUT = 100;
 	public final static int SCRIPT_TIMEOUT = 1000;
 	//we can call this so it wont be hard coded in our TestBaseClass
-	
+
 }

@@ -47,7 +47,8 @@ public WebDriver openApplication(String browserName) {
 		Coptions.addArguments("--incognito");
 		Coptions.setExperimentalOption("excludeSwitches",Arrays.asList("enable-automation","disable-infobars"));
 	//	Coptions.addArguments("--no-sandbox");
-    //  Coptions.addArguments("headless");	
+ //     Coptions.addArguments("headless");	//if we want to use this comment the start maximized option, it worked i used it and 21 out of 22 test cases passed
+		//without headless all 22 testcases passed
         Coptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 		driver = new ChromeDriver(Coptions);
 		

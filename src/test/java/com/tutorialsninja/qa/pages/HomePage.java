@@ -50,9 +50,9 @@ public class HomePage {
 		return new LoginPage(driver); // this is new
 	}
 	
-	public void clickOnRegisterLink() {
+	public RegisterPage clickOnRegisterLink() {
 		registerLink.click();
-		
+		return new RegisterPage(driver);
 	}
 
 	public void clickOnSearchButton() {
